@@ -34,6 +34,8 @@ namespace PlanificacionProcesos
              * mostrar la memoria creada
             */
         }
+        List<Proceso> ProcesosTerminados = new List<Proceso>();
+
         //memoria creada al principio con la cantidad de bloques y el tamaño de cada bloque por el usuario
         static List<Bloque> CrearMemoria(int cantidadBloques, int[] tamaño)
         {
@@ -80,6 +82,30 @@ namespace PlanificacionProcesos
             }
            
             Console.WriteLine("No hay bloques libres suficientes para el proceso");
+        }
+        static void TerminarProceso(List<Bloque> memoria, int idProceso)
+        {
+            for (int i = 0; i < memoria.Count; i++)
+            {//buscar el proceso en la memoria por su id, que este asignado a un bloque de memoria y que este activo
+                if (memoria[i].ProcesoAsignado != null && memoria[i].ProcesoAsignado.Id == idProceso && memoria[i].ProcesoAsignado.Estado == "Activo")
+                {
+                    //terminar el proceso actualizando la memoria como el proceso
+                    memoria[i].EstaLibre = true;
+                    memoria[i].ProcesoAsignado.Estado = "Terminado";
+                    //se guarda en otra lista los procesos terminados que ya no estan en la memoria
+                    Proceso procesoTerminado = memoria[i].ProcesoAsignado;
+                    //se elimina de la memoria el proceso terminado
+                    memoria[i].ProcesoAsignado = null;
+                    Console.WriteLine($"Proceso {idProceso} terminado");
+                    return;
+                }
+            }
+            Console.WriteLine($"No se encontró el proceso {idProceso} en la memoria");
+        }
+        static void MostrarTablaProcesos(List<Bloque> memoria)
+        {
+            Console.WriteLine("Tabla de procesos:\n \tID");
+
         }
     }
 }

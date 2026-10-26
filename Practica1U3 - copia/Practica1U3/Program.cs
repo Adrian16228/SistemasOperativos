@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace PlanificacionProcesos
 {
-    public class Bloque
+    public class Bloque(int id, int tamaño)
     {
         public int Id { get; set; }
         public int Tamaño { get; set; }
@@ -32,7 +32,9 @@ namespace PlanificacionProcesos
             /*pedir datos a usuario para crear la memoria
              * ejecutar "crearmemoria"
              * mostrar la memoria creada
+         
             */
+            
         }
         List<Proceso> ProcesosTerminados = new List<Proceso>();
 
@@ -104,7 +106,9 @@ namespace PlanificacionProcesos
         }
         static void MostrarTablaProcesos(List<Bloque> memoria)
         {
-            Console.WriteLine("Tabla de procesos:\n \tID");
+            Console.WriteLine("Tabla de procesos:\n \tID\t Memoria solicitada(MB) \tEstado");
+            for(int i=0;i<memoria.Count)
+            Console.WriteLine("")
 
         }
     }

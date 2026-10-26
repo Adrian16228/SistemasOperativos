@@ -1,0 +1,15 @@
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.AssemblyInfoInputs.cache
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.AssemblyInfo.cs
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.csproj.CoreCompileInputs.cache
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.sourcelink.json
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/bin/Debug/net10.0/Practica1U3
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/bin/Debug/net10.0/Practica1U3.deps.json
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/bin/Debug/net10.0/Practica1U3.runtimeconfig.json
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/bin/Debug/net10.0/Practica1U3.dll
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/bin/Debug/net10.0/Practica1U3.pdb
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.dll
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/refint/Practica1U3.dll
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.pdb
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/Practica1U3.genruntimeconfig.cache
+/workspaces/SistemasOperativos/Practica1U3 - copia/Practica1U3/obj/Debug/net10.0/ref/Practica1U3.dll

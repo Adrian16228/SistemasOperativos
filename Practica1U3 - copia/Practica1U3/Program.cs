@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 namespace PlanificacionProcesos
 {
-    public class Bloque(int id, int tamaño)
+    public class Bloque
     {
         public int Id { get; set; }
         public int Tamaño { get; set; }
         public bool EstaLibre { get; set; }
         public Proceso ProcesoAsignado { get; set; }
+        public Bloque(int id, int tamaño)
+        {
+            Id=id;
+            Tamaño=tamaño;
+        }
 
     }
     public class Proceso
@@ -85,6 +90,100 @@ namespace PlanificacionProcesos
            
             Console.WriteLine("No hay bloques libres suficientes para el proceso");
         }
+        static void BestFit(List<Bloque> memoria, int idProceso, int memoriaSolicitada)
+        {//crear un nuevo proceso con los datos del usuario
+            Proceso proceso = new Proceso
+            {
+                Id = idProceso,
+                MemoriaSolicitada = memoriaSolicitada,
+                Estado = "En espera",
+                ParticionAsignada = -1,
+                MemoriaOcupada = 0,
+                FragmentacionInterna = 0
+            };
+
+            //buscar el primer bloque libre que tenga el tamaño suficiente para el proceso
+            int mejorDesperdicio = int.MaxValue;
+            int mejorBloque = -1;
+            int desperdicio = 0;
+            for (int i = 0; i < memoria.Count; i++)
+            {
+                if (memoria[i].EstaLibre && memoria[i].Tamaño >= memoriaSolicitada)
+                {
+                //calcular el desperdicio de memoria 
+                    desperdicio = memoria[i].Tamaño - memoriaSolicitada;
+                    //si el desperdicio es menor al mejor desperdicio actual, actualizar el mejor desperdicio y el mejor bloque
+                    if (desperdicio < mejorDesperdicio)
+                    {
+                        mejorDesperdicio = desperdicio;
+                        mejorBloque = i;
+                    }
+                }
+            }
+            if (mejorBloque != -1)
+            {
+                //asignar el proceso al bloque
+                memoria[mejorBloque].EstaLibre = false;
+                memoria[mejorBloque].ProcesoAsignado = proceso;
+                //actualizar el estado del proceso
+                proceso.Estado = "Activo";
+                proceso.ParticionAsignada = memoria[mejorBloque].Id;
+                proceso.MemoriaOcupada = memoriaSolicitada;
+                proceso.FragmentacionInterna = memoria[mejorBloque].Tamaño - memoriaSolicitada;
+
+                Console.WriteLine($"Proceso asignado al bloque {memoria[mejorBloque].Id}");
+                return;
+            }
+            Console.WriteLine("No hay bloques libres suficientes para el proceso");
+        }
+
+        static void WorstFit(List<Bloque> memoria, int idProceso, int memoriaSolicitada)
+        {//crear un nuevo proceso con los datos del usuario
+            Proceso proceso = new Proceso
+            {
+                Id = idProceso,
+                MemoriaSolicitada = memoriaSolicitada,
+                Estado = "En espera",
+                ParticionAsignada = -1,
+                MemoriaOcupada = 0,
+                FragmentacionInterna = 0
+            };
+            int peorDesperdicio = int.MaxValue;
+            int peorBloque = -1;
+            int desperdicio = 0;
+            //buscar el primer bloque libre que tenga el tamaño suficiente para el proceso
+            for (int i = 0; i < memoria.Count; i++)
+            {//calcular el desperdicio de memoria 
+                desperdicio = memoria[i].Tamaño - memoriaSolicitada;
+
+                if (memoria[i].EstaLibre && memoria[i].Tamaño >= memoriaSolicitada && desperdicio > peorDesperdicio)
+                { 
+                //calcular el desperdicio de memoria 
+                    desperdicio = memoria[i].Tamaño - memoriaSolicitada;
+                    if (desperdicio > peorDesperdicio)
+                    {
+                        peorDesperdicio = desperdicio;
+                        peorBloque = i;
+                    }
+                }
+            }
+            if (peorBloque != -1)
+            {
+                //asignar el proceso al bloque
+                memoria[peorBloque].EstaLibre = false;
+                memoria[peorBloque].ProcesoAsignado = proceso;
+                //actualizar el estado del proceso
+                proceso.Estado = "Activo";
+                proceso.ParticionAsignada = memoria[peorBloque].Id;
+                proceso.MemoriaOcupada = memoriaSolicitada;
+                proceso.FragmentacionInterna = memoria[peorBloque].Tamaño - memoriaSolicitada;
+
+                Console.WriteLine($"Proceso asignado al bloque {memoria[peorBloque].Id}");
+                return;
+            }
+            Console.WriteLine("No hay bloques libres suficientes para el proceso");
+        }
+
         static void TerminarProceso(List<Bloque> memoria, int idProceso)
         {
             for (int i = 0; i < memoria.Count; i++)
@@ -105,12 +204,16 @@ namespace PlanificacionProcesos
             Console.WriteLine($"No se encontró el proceso {idProceso} en la memoria");
         }
         static void MostrarTablaProcesos(List<Bloque> memoria)
+{
+    Console.WriteLine("Tabla de procesos:\n \tID\t Memoria solicitada(MB) \tEstado");
+    for (int i = 0; i < memoria.Count; i++)
+    {
+        if(memoria[i].ProcesoAsignado != null)
         {
-            Console.WriteLine("Tabla de procesos:\n \tID\t Memoria solicitada(MB) \tEstado");
-            for(int i=0;i<memoria.Count)
-            Console.WriteLine("")
-
+             Console.WriteLine("\t" + memoria[i].ProcesoAsignado.Id + "\t" + memoria[i].ProcesoAsignado.MemoriaSolicitada + " \t" + memoria[i].ProcesoAsignado.Estado);
         }
+    }
+}
     }
 }
 /*
